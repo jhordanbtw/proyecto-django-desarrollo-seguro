@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="{% static 'productos/estilos.css' %}">
+</head>
+<body>
+    <main class="contenedor">
+        <section class="hero">
+            <p class="etiqueta">Proyecto Django</p>
+            <h1>Gestión de Productos</h1>
+            <p>Aplicación web académica conectada a una base de datos SQLite.</p>
+        </section>
+
+        <section class="tarjeta resumen">
+            <h2>Estado del sistema</h2>
+            <p>Productos activos registrados: <strong>{{ cantidad_productos }}</strong></p>
+        </section>
+
+        <section class="tarjeta">
+            <h2>Productos recientes</h2>
+            {% if productos_recientes %}
+                <div class="productos">
+                    {% for producto in productos_recientes %}
+                        <article class="producto">
+                            <h3>{{ producto.nombre }}</h3>
+                            <p>{{ producto.descripcion|default:"Sin descripción" }}</p>
+                            <span>${{ producto.precio }}</span>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No hay productos cargados todavía.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
