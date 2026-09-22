@@ -9,6 +9,7 @@
 </head>
 <body>
     <main class="contenedor">
+
         <section class="hero">
             <p class="etiqueta">Proyecto Django</p>
             <h1>Gestión de Productos</h1>
@@ -17,25 +18,45 @@
 
         <section class="tarjeta resumen">
             <h2>Estado del sistema</h2>
-            <p>Productos activos registrados: <strong>{{ cantidad_productos }}</strong></p>
+            <p>
+                Productos activos registrados:
+                <strong>{{ cantidad_productos }}</strong>
+            </p>
         </section>
 
         <section class="tarjeta">
             <h2>Productos recientes</h2>
+
             {% if productos_recientes %}
                 <div class="productos">
+
                     {% for producto in productos_recientes %}
                         <article class="producto">
+
                             <h3>{{ producto.nombre }}</h3>
-                            <p>{{ producto.descripcion|default:"Sin descripción" }}</p>
+
+                            <p>
+                                {{ producto.descripcion|default:"Sin descripción" }}
+                            </p>
+
                             <span>${{ producto.precio }}</span>
+
+                            <p>
+                                <a href="{% url 'productos:detalle' producto.id %}">
+                                    Ver detalle
+                                </a>
+                            </p>
+
                         </article>
                     {% endfor %}
+
                 </div>
             {% else %}
                 <p>No hay productos cargados todavía.</p>
             {% endif %}
+
         </section>
+
     </main>
 </body>
 </html>
