@@ -11,21 +11,42 @@
     <main class="contenedor">
 
         <section class="hero">
-            <p class="etiqueta">Proyecto Django</p>
-            <h1>Gestión de Productoooooos</h1>
-            <p>Aplicación web académica conectada a una base de datos SQLite.</p>
+            <div>
+                <p class="etiqueta">Proyecto Django</p>
+                <h1>Gestión de Productos</h1>
+                <p class="subtitulo">
+                    Administra y consulta los productos registrados en el sistema.
+                </p>
+            </div>
+
+            <div class="estado">
+                <span class="punto"></span>
+                Sistema operativo
+            </div>
         </section>
 
         <section class="tarjeta resumen">
-            <h2>Estado del sistema</h2>
-            <p>
-                Productos activos registrados:
-                <strong>{{ cantidad_productos }}</strong>
-            </p>
+            <div>
+                <p class="texto-secundario">Productos activos</p>
+                <p class="numero">{{ cantidad_productos }}</p>
+            </div>
+
+            <div class="resumen-texto">
+                <h2>Estado del sistema</h2>
+                <p>
+                    La aplicación se encuentra conectada correctamente
+                    a la base de datos y lista para consultar productos.
+                </p>
+            </div>
         </section>
 
-        <section class="tarjeta">
-            <h2>Productos recientes</h2>
+        <section>
+            <div class="encabezado-seccion">
+                <div>
+                    <p class="etiqueta">Catálogo</p>
+                    <h2>Productos recientes</h2>
+                </div>
+            </div>
 
             {% if productos_recientes %}
                 <div class="productos">
@@ -33,29 +54,42 @@
                     {% for producto in productos_recientes %}
                         <article class="producto">
 
+                            <div class="producto-superior">
+                                <span class="badge">Activo</span>
+                            </div>
+
                             <h3>{{ producto.nombre }}</h3>
 
-                            <p>
-                                {{ producto.descripcion|default:"Sin descripción" }}
+                            <p class="descripcion">
+                                {{ producto.descripcion|default:"Sin descripción disponible." }}
                             </p>
 
-                            <span>${{ producto.precio }}</span>
+                            <div class="producto-pie">
+                                <span class="precio">
+                                    ${{ producto.precio }}
+                                </span>
 
-                            <p>
-                                <a href="{% url 'productos:detalle' producto.id %}">
+                                <a class="boton" href="{% url 'productos:detalle' producto.id %}">
                                     Ver detalle
                                 </a>
-                            </p>
+                            </div>
 
                         </article>
                     {% endfor %}
 
                 </div>
             {% else %}
-                <p>No hay productos cargados todavía.</p>
-            {% endif %}
 
+                <div class="tarjeta">
+                    <p>No hay productos registrados actualmente.</p>
+                </div>
+
+            {% endif %}
         </section>
+
+        <footer>
+            Proyecto académico Django · Control de versiones con Git y GitHub
+        </footer>
 
     </main>
 </body>

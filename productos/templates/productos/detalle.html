@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ producto.nombre }} | Gestión de Productos</title>
+    <link rel="stylesheet" href="{% static 'productos/estilos.css' %}">
+</head>
+<body>
+
+    <main class="contenedor detalle-contenedor">
+
+        <a class="volver" href="{% url 'productos:inicio' %}">
+            ← Volver a productos
+        </a>
+
+        <section class="tarjeta detalle">
+
+            <div class="detalle-encabezado">
+
+                <div>
+                    <p class="etiqueta">Detalle del producto</p>
+                    <h1>{{ producto.nombre }}</h1>
+                </div>
+
+                <span class="badge">
+                    Activo
+                </span>
+
+            </div>
+
+            <div class="detalle-contenido">
+
+                <div>
+                    <p class="texto-secundario">Descripción</p>
+
+                    <p class="detalle-descripcion">
+                        {{ producto.descripcion|default:"Este producto no posee una descripción registrada." }}
+                    </p>
+                </div>
+
+                <div class="detalle-precio">
+                    <p class="texto-secundario">Precio</p>
+                    <strong>${{ producto.precio }}</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
